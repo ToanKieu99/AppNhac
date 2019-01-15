@@ -1,5 +1,6 @@
 package com.toanvq.fpoly.appnhac.service;
 
+import com.toanvq.fpoly.appnhac.model.PlayList;
 import com.toanvq.fpoly.appnhac.model.Quangcao;
 
 import java.util.List;
@@ -14,5 +15,10 @@ public interface Dataservice {
     @GET("songbanner.php")
     // nhận dữ liệu về
     Call<List<Quangcao>> GetDataBanner();
+
+
+    @GET("playlistforcurrent.php")
+    Call<List<PlayList>> GetPlayListCurrentDay();
+
 
 }

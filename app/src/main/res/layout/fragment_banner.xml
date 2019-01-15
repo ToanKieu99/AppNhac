@@ -8,10 +8,9 @@
         android:layout_height="wrap_content">
 
         <android.support.v4.view.ViewPager
-            android:background="#d28787"
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="180dp"></android.support.v4.view.ViewPager>
+            android:layout_height="180dp"/>
 
 
         <me.relex.circleindicator.CircleIndicator
@@ -19,7 +18,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/indicatordefault"
             android:layout_alignParentRight="true"
-        android:layout_height="13dp"></me.relex.circleindicator.CircleIndicator>
+        android:layout_height="13dp"/>
 
     </RelativeLayout>
 </ScrollView>

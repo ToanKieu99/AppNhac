@@ -26,6 +26,6 @@
         app:tabIndicatorHeight="2dp"
         android:background="@android:color/transparent"
         android:contextClickable="false"
-        android:layout_height="?attr/actionBarSize"></android.support.design.widget.TabLayout>
+        android:layout_height="?attr/actionBarSize"/>
 
 </LinearLayout>
