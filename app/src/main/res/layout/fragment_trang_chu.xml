@@ -25,7 +25,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-
+        <fragment
+            android:name="com.toanvq.fpoly.appnhac.fragment.Fragment_ChuDe_TheLoai_ToDay"
+            android:id="@+id/fragmentChudeTheLoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
