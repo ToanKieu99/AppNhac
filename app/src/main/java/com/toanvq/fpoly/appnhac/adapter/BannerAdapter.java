@@ -1,6 +1,7 @@
 package com.toanvq.fpoly.appnhac.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
+import com.toanvq.fpoly.appnhac.activity.DanhSachBaiHatActivity;
 import com.toanvq.fpoly.appnhac.model.Quangcao;
 
 import java.util.ArrayList;
@@ -41,8 +44,8 @@ public class BannerAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
+        final LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_banner,null);
         ImageView imgbackgroundbanner = view.findViewById(R.id.imageviewbackgroundbanner);
         ImageView imgsongbanner = view.findViewById(R.id.imageviewbanner);
@@ -54,7 +57,16 @@ public class BannerAdapter extends PagerAdapter {
         Picasso.with(context).load(arrayListBanner.get(position).getHinhBaiHat()).into(imgsongbanner);
         txttitlesongbanner.setText(arrayListBanner.get(position).getTenBaiHat());
         txtnoidung.setText(arrayListBanner.get(position).getNoidung());
+        
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DanhSachBaiHatActivity.class);
+                intent.putExtra("BANNER",arrayListBanner.get(position));
+                context.startActivity(intent);
 
+            }
+        });
 
         container.addView(view);
         return view;

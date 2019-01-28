@@ -36,6 +36,14 @@
             android:id="@+id/fragmentAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <fragment
+            android:name="com.toanvq.fpoly.appnhac.fragment.Fragment_BaiHat"
+            android:id="@+id/fragmentBaiHat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
     </LinearLayout>
 
 </ScrollView>
