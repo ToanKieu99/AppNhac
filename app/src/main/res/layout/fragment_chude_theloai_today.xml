@@ -25,12 +25,14 @@
             android:text="Xem thêm"
             android:textSize="18sp"
             android:layout_alignParentRight="true"
-            android:textColor="#898888"/>
+            android:textColor="#610303"/>
 
     </RelativeLayout>
 
 
     <HorizontalScrollView
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:id="@+id/horizontalSconView"
         android:scrollbars="none"
         android:layout_below="@id/relatichudetheloai"
