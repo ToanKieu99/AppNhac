@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +30,14 @@ public class Fragment_PlayList extends Fragment {
 
     View view;
     ListView lvPlaylist;
-    TextView txttitlePlaylist,txtviewxemthemplaylist;
+    TextView txttitlePlaylist, txtviewxemthemplaylist;
     PlaylistAdapter playlistAdapter;
     ArrayList<PlayList> mangPlaylist;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_playlist,container,false);
+        view = inflater.inflate(R.layout.fragment_playlist, container, false);
         lvPlaylist = view.findViewById(R.id.listviewPlaylist);
         txttitlePlaylist = view.findViewById(R.id.textviewTitlePlaylist);
         txtviewxemthemplaylist = view.findViewById(R.id.textviewviewmoreplaylist);
@@ -50,10 +51,11 @@ public class Fragment_PlayList extends Fragment {
         callback.enqueue(new Callback<List<PlayList>>() {
             @Override
             public void onResponse(Call<List<PlayList>> call, Response<List<PlayList>> response) {
-                 mangPlaylist = (ArrayList<PlayList>) response.body();
-               playlistAdapter = new PlaylistAdapter(getActivity(),android.R.layout.simple_list_item_1,mangPlaylist);
-               lvPlaylist.setAdapter(playlistAdapter);
-               setListViewHeightBasedOnChildren(lvPlaylist);
+                mangPlaylist = (ArrayList<PlayList>) response.body();
+
+                playlistAdapter = new PlaylistAdapter(getActivity(), android.R.layout.simple_list_item_1, mangPlaylist);
+                lvPlaylist.setAdapter(playlistAdapter);
+                setListViewHeightBasedOnChildren(lvPlaylist);
             }
 
             @Override
@@ -75,7 +77,7 @@ public class Fragment_PlayList extends Fragment {
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
 
-            if(listItem != null){
+            if (listItem != null) {
                 // This next line is needed before you call measure or else you won't get measured height at all. The listitem needs to be drawn first to know the height.
                 listItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
                 listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);

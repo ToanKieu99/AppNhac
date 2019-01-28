@@ -17,17 +17,17 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
 import com.toanvq.fpoly.appnhac.model.ChuDe;
-import com.toanvq.fpoly.appnhac.model.ChuDeTheLoai;
+import com.toanvq.fpoly.appnhac.model.ChuDeTheLoaiTrongNgay;
 import com.toanvq.fpoly.appnhac.model.TheLoai;
 import com.toanvq.fpoly.appnhac.service.APIservice;
 import com.toanvq.fpoly.appnhac.service.Dataservice;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
 
@@ -38,7 +38,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_chude_theloai_today,container,false);
+        view = inflater.inflate(R.layout.fragment_chude_theloai_today, container, false);
 
         horizontalScrollView = view.findViewById(R.id.horizontalSconView);
         txtxemthemchudetheloai = view.findViewById(R.id.textviewxemthem);
@@ -48,61 +48,62 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
 
     private void GetData() {
         Dataservice dataservice = APIservice.getService();
-        Call<List<ChuDeTheLoai>> callback = dataservice.GetCategoryMusic();
-        callback.enqueue(new Callback<List<ChuDeTheLoai>>() {
-            @Override
-            public void onResponse(Call<List<ChuDeTheLoai>> call, Response<List<ChuDeTheLoai>> response) {
-            ChuDeTheLoai chuDeTheLoai = (ChuDeTheLoai) response.body();
+       Call<ChuDeTheLoaiTrongNgay> callback = dataservice.GetCategoryMusic();
+       callback.enqueue(new Callback<ChuDeTheLoaiTrongNgay>() {
+           @Override
+           public void onResponse(Call<ChuDeTheLoaiTrongNgay> call, Response<ChuDeTheLoaiTrongNgay> response) {
+               ChuDeTheLoaiTrongNgay chuDeTheLoaiTrongNgay = response.body();
 
+               // mảng chủ đề
+               ArrayList<ChuDe> chuDeArrayList = new ArrayList<>();
+               chuDeArrayList.addAll(chuDeTheLoaiTrongNgay.getChuDe());
+               // mảng thể loại
+               ArrayList<TheLoai> theLoaiArrayList = new ArrayList<>();
+               theLoaiArrayList.addAll(chuDeTheLoaiTrongNgay.getTheLoai());
+               // ánh xạ view
+               LinearLayout linearLayout = new LinearLayout(getActivity());
+               linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+               // căn chỉnh kích thước của view
+               LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(580, 300);
+               layout.setMargins(10, 20, 10, 30);
 
-            final ArrayList<ChuDe> chuDeArrayList = new ArrayList<>();
-            chuDeArrayList.addAll(chuDeTheLoai.getChuDe());
+                // lấy ra các item của Chủ đề rôi đổi ra View vừa tạo
+               for (int i = 0; i < (chuDeArrayList.size()); i++) {
+                   CardView cardView = new CardView(getActivity());
+                   cardView.setRadius(10);
+                   ImageView imageView = new ImageView(getActivity());
+                   imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                   if (chuDeArrayList.get(i).getHinhChuDe() != null) {
+                       Picasso.with(getActivity()).load(chuDeArrayList.get(i).getHinhChuDe()).into(imageView);
+                   }
+                   cardView.setLayoutParams(layout);
+                   cardView.addView(imageView);
+                   linearLayout.addView(cardView);
+               }
 
-            final ArrayList<TheLoai> theLoaiArrayList = new ArrayList<>();
-            theLoaiArrayList.addAll(chuDeTheLoai.getTheLoai());
+               // lấy ra các item thể loại rồi đổ ra View vừa tạo
+               for (int j = 0; j < (theLoaiArrayList.size()); j++) {
+                   CardView cardView = new CardView(getActivity());
+                   cardView.setRadius(10);
+                   ImageView imageView = new ImageView(getActivity());
+                   imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                   if (theLoaiArrayList.get(j).getHinhTheLoai() != null) {
+                       Picasso.with(getActivity()).load(theLoaiArrayList.get(j).getHinhTheLoai()).into(imageView);
+                   }
+                   cardView.setLayoutParams(layout);
+                   cardView.addView(imageView);
+                   linearLayout.addView(cardView);
+               }
+                // Lấy chủ đề vs thể loại hiển thị lên HorizontalScrollView
+               horizontalScrollView.addView(linearLayout);
 
+           }
 
-                LinearLayout linearLayout = new LinearLayout(getActivity());
-                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+           @Override
+           public void onFailure(Call<ChuDeTheLoaiTrongNgay> call, Throwable t) {
 
-                LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(580,250);
-                layout.setMargins(10,20,10,30);
-
-                for (int i =0; i < (chuDeArrayList.size()); i++){
-                    CardView cardView = new CardView(getActivity());
-                    cardView.setRadius(10);
-                    ImageView imageView = new ImageView(getActivity());
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    if (chuDeArrayList.get(i).getHinhChuDe() != null){
-                        Picasso.with(getActivity()).load(chuDeArrayList.get(i).getHinhChuDe()).into(imageView);
-                    }
-                    cardView.setLayoutParams(layout);
-                    cardView.addView(imageView);
-                    linearLayout.addView(cardView);
-                }
-
-
-                for (int j =0; j < (theLoaiArrayList.size()); j++){
-                    CardView cardView = new CardView(getActivity());
-                    cardView.setRadius(10);
-                    ImageView imageView = new ImageView(getActivity());
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                    if (theLoaiArrayList.get(j).getHinhTheLoai() != null){
-                        Picasso.with(getActivity()).load(theLoaiArrayList.get(j).getHinhTheLoai()).into(imageView);
-                    }
-                    cardView.setLayoutParams(layout);
-                    cardView.addView(imageView);
-                    linearLayout.addView(cardView);
-                }
-                horizontalScrollView.addView(linearLayout);
-
-            }
-
-            @Override
-            public void onFailure(Call<List<ChuDeTheLoai>> call, Throwable t) {
-
-            }
-        });
+           }
+       });
 
     }
 
