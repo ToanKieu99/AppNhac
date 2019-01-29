@@ -1,5 +1,6 @@
 package com.toanvq.fpoly.appnhac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,12 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.toanvq.fpoly.appnhac.R;
+import com.toanvq.fpoly.appnhac.activity.DanhSachBaiHatActivity;
 import com.toanvq.fpoly.appnhac.adapter.PlaylistAdapter;
 import com.toanvq.fpoly.appnhac.model.PlayList;
 import com.toanvq.fpoly.appnhac.service.APIservice;
@@ -56,6 +59,15 @@ public class Fragment_PlayList extends Fragment {
                 playlistAdapter = new PlaylistAdapter(getActivity(), android.R.layout.simple_list_item_1, mangPlaylist);
                 lvPlaylist.setAdapter(playlistAdapter);
                 setListViewHeightBasedOnChildren(lvPlaylist);
+                lvPlaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getActivity(),DanhSachBaiHatActivity.class);
+                        intent.putExtra("ITEMPLAYLIST",mangPlaylist.get(position));
+                        startActivity(intent);
+
+                    }
+                });
             }
 
             @Override

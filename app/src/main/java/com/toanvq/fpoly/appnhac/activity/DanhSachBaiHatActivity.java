@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
 import com.toanvq.fpoly.appnhac.adapter.DanhsachbaihatAdapter;
 import com.toanvq.fpoly.appnhac.model.BaiHat;
+import com.toanvq.fpoly.appnhac.model.PlayList;
 import com.toanvq.fpoly.appnhac.model.Quangcao;
 import com.toanvq.fpoly.appnhac.service.APIservice;
 import com.toanvq.fpoly.appnhac.service.Dataservice;
@@ -48,6 +49,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     ImageView imgdanhsachcakhuc;
     ArrayList<BaiHat> mangbaihat;
     DanhsachbaihatAdapter danhsachbaihatAdapter;
+    PlayList playList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,30 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             setValueInView(quangcao.getTenBaiHat(), quangcao.getHinhBaiHat());
             GetDataquangcao(quangcao.getIdQuangCao());
         }
+        if (playList != null && !playList.getTen().equals("")){
+            setValueInView(playList.getTen(),playList.getHinhicon());
+            GetDataPlaylist(playList.getIdPlayList());
+        }
+    }
+
+    private void GetDataPlaylist(String idplaylist) {
+        Dataservice dataservice = APIservice.getService();
+        Call<List<BaiHat>> callback = dataservice.GetDanhSachBaihatTheoPlaylist(idplaylist);
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                mangbaihat = (ArrayList<BaiHat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhSachBaiHatActivity.this,mangbaihat);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
+                recyclerViewDanhSach.setLayoutManager(linearLayoutManager);
+                recyclerViewDanhSach.setAdapter(danhsachbaihatAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
     }
 
 
@@ -135,7 +161,9 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         if (intent != null) {
             if (intent.hasExtra("BANNER")) {
                 quangcao = (Quangcao) intent.getSerializableExtra("BANNER");
-                Toast.makeText(this, quangcao.getTenBaiHat(), Toast.LENGTH_SHORT).show();
+            }
+            if (intent.hasExtra("ITEMPLAYLIST")){
+                playList = (PlayList) intent.getSerializableExtra("ITEMPLAYLIST");
             }
         }
     }

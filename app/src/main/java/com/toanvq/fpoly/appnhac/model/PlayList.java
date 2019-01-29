@@ -3,7 +3,9 @@ package com.toanvq.fpoly.appnhac.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PlayList {
+import java.io.Serializable;
+
+public class PlayList implements Serializable {
 
     @SerializedName("IdPlayList")
     @Expose
