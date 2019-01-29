@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.toanvq.fpoly.appnhac.R;
 import com.toanvq.fpoly.appnhac.activity.DanhSachBaiHatActivity;
+import com.toanvq.fpoly.appnhac.activity.DanhsachPlaylistActivity;
 import com.toanvq.fpoly.appnhac.adapter.PlaylistAdapter;
 import com.toanvq.fpoly.appnhac.model.PlayList;
 import com.toanvq.fpoly.appnhac.service.APIservice;
@@ -45,6 +46,13 @@ public class Fragment_PlayList extends Fragment {
         txttitlePlaylist = view.findViewById(R.id.textviewTitlePlaylist);
         txtviewxemthemplaylist = view.findViewById(R.id.textviewviewmoreplaylist);
         GetData();
+        txtviewxemthemplaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),DanhsachPlaylistActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
