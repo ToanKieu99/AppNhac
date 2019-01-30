@@ -2,6 +2,7 @@ package com.toanvq.fpoly.appnhac.service;
 
 import com.toanvq.fpoly.appnhac.model.Album;
 import com.toanvq.fpoly.appnhac.model.BaiHat;
+import com.toanvq.fpoly.appnhac.model.ChuDe;
 import com.toanvq.fpoly.appnhac.model.ChuDeTheLoaiTrongNgay;
 import com.toanvq.fpoly.appnhac.model.PlayList;
 import com.toanvq.fpoly.appnhac.model.Quangcao;
@@ -50,6 +51,14 @@ public interface Dataservice {
 
     @GET("danhsachcacplaylist.php")
     Call<List<PlayList>> GetDanhSachPlaylist();
+
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHat>> Getdanhsachbaihattheotheloai(@Field("idtheloai") String idtheloai);
+
+    @GET("tatcachude.php")
+    Call<List<ChuDe>> GetAllChuDe();
 
 
 

@@ -1,5 +1,6 @@
 package com.toanvq.fpoly.appnhac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
+import com.toanvq.fpoly.appnhac.activity.DanhSachBaiHatActivity;
+import com.toanvq.fpoly.appnhac.activity.DanhSachTatcachudeActivity;
 import com.toanvq.fpoly.appnhac.model.ChuDe;
 import com.toanvq.fpoly.appnhac.model.ChuDeTheLoaiTrongNgay;
 import com.toanvq.fpoly.appnhac.model.TheLoai;
@@ -42,6 +45,13 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
 
         horizontalScrollView = view.findViewById(R.id.horizontalSconView);
         txtxemthemchudetheloai = view.findViewById(R.id.textviewxemthem);
+        txtxemthemchudetheloai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),DanhSachTatcachudeActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData();
         return view;
     }
@@ -58,7 +68,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                ArrayList<ChuDe> chuDeArrayList = new ArrayList<>();
                chuDeArrayList.addAll(chuDeTheLoaiTrongNgay.getChuDe());
                // mảng thể loại
-               ArrayList<TheLoai> theLoaiArrayList = new ArrayList<>();
+               final ArrayList<TheLoai> theLoaiArrayList = new ArrayList<>();
                theLoaiArrayList.addAll(chuDeTheLoaiTrongNgay.getTheLoai());
                // ánh xạ view
                LinearLayout linearLayout = new LinearLayout(getActivity());
@@ -93,6 +103,17 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                    cardView.setLayoutParams(layout);
                    cardView.addView(imageView);
                    linearLayout.addView(cardView);
+
+                   final int finalJ = j;
+                   imageView.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           Intent intent = new Intent(getActivity(),DanhSachBaiHatActivity.class);
+                           intent.putExtra("IDTHELOAI",theLoaiArrayList.get(finalJ));
+                           startActivity(intent);
+                       }
+                   });
+
                }
                 // Lấy chủ đề vs thể loại hiển thị lên HorizontalScrollView
                horizontalScrollView.addView(linearLayout);

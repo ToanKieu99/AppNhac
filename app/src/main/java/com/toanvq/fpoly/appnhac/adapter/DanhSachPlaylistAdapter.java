@@ -1,6 +1,7 @@
 package com.toanvq.fpoly.appnhac.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
+import com.toanvq.fpoly.appnhac.activity.DanhSachBaiHatActivity;
 import com.toanvq.fpoly.appnhac.model.PlayList;
 
 import java.util.ArrayList;
@@ -56,6 +58,14 @@ public class DanhSachPlaylistAdapter extends RecyclerView.Adapter<DanhSachPlayli
             super(itemView);
             imghinhnen = itemView.findViewById(R.id.imageviewDanhSachcacplaylist);
             txttenplaylist = itemView.findViewById(R.id.textviewdanhsachcacplaylist);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,DanhSachBaiHatActivity.class);
+                    intent.putExtra("ITEMPLAYLIST",arrayPlayList.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }
