@@ -1,40 +1,36 @@
 package com.toanvq.fpoly.appnhac.activity;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.toanvq.fpoly.appnhac.R;
-import com.toanvq.fpoly.appnhac.adapter.MainViewPagerAdapter;
-import com.toanvq.fpoly.appnhac.fragment.Fragment_Tim_kiem;
 import com.toanvq.fpoly.appnhac.fragment.Fragment_Trang_Chu;
 
 public class MainActivity extends AppCompatActivity {
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
+
+    TextView btTimKiem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        anhxa();
+        btTimKiem = findViewById(R.id.timkiem);
+        btTimKiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new TimKiem_Activity()).commit();
+                Intent intent = new Intent(MainActivity.this,TimKiem_Activity.class);
+                startActivity(intent);
+            }
+        });
         init();
     }
 
     private void init() {
-        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        mainViewPagerAdapter.addFragment(new Fragment_Trang_Chu(), "Trang Chủ");
-        mainViewPagerAdapter.addFragment(new Fragment_Tim_kiem(),"Tìm Kiếm");
-        viewPager.setAdapter(mainViewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.icontrangchu);
-        tabLayout.getTabAt(1).setIcon(R.drawable.iconsearch);
-    }
-
-    private void anhxa() {
-        tabLayout = findViewById(R.id.myTabLayout);
-        viewPager = findViewById(R.id.myViewPager);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new Fragment_Trang_Chu()).commit();
     }
 }

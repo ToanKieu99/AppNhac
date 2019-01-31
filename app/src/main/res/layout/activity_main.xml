@@ -7,25 +7,31 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-   <android.support.v4.view.ViewPager
-       android:id="@+id/myViewPager"
-       android:layout_weight="1"
-       android:layout_width="match_parent"
-       android:layout_height="0dp">
-
-
-   </android.support.v4.view.ViewPager>
-
-    <android.support.design.widget.TabLayout
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:id="@+id/myTabLayout"
-        app:tabMode="fixed"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbartuychon"
+        android:background="#ffffff">
 
-        app:tabSelectedTextColor="#f43333"
-        app:tabTextColor="#000"
-        app:tabIndicatorHeight="2dp"
-        android:background="@android:color/transparent"
-        android:contextClickable="false"
-        android:layout_height="?attr/actionBarSize"/>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/timkiem"
+                android:gravity="center|start"
+                android:drawableLeft="@drawable/ic_search_black_24dp"
+                android:text="Tìm kiếm bài hát, Playlist,.."
+                android:textColor="#9C9C9C"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+    <include layout="@layout/fragment"/>
 
 </LinearLayout>

@@ -23,7 +23,8 @@
         <activity android:name=".activity.DanhSachTatcachudeActivity" />
         <activity android:name=".activity.DanhsachtheloaitheochudeActivity" />
         <activity android:name=".activity.DanhSachAlbumActivity" />
-        <activity android:name=".activity.PlayNhacActivity"></activity>
+        <activity android:name=".activity.PlayNhacActivity" />
+        <activity android:name=".activity.TimKiem_Activity"></activity>
     </application>
 
 </manifest>
