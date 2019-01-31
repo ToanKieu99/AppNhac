@@ -76,8 +76,8 @@
 
             <ImageButton
                 android:id="@+id/imamgebuttonsuffle"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginRight="15dp"
                 android:background="@null"
                 android:scaleType="fitXY"
@@ -112,8 +112,8 @@
 
             <ImageButton
                 android:id="@+id/imamgebuttonpepeat"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginRight="15dp"
                 android:background="@null"
                 android:scaleType="fitXY"
