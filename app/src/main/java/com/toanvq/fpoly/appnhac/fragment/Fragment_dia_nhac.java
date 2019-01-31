@@ -1,5 +1,6 @@
 package com.toanvq.fpoly.appnhac.fragment;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class Fragment_dia_nhac extends Fragment {
     View view;
     ObjectAnimator objectAnimator;
     CircleImageView circleImageViewl;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,6 +33,9 @@ public class Fragment_dia_nhac extends Fragment {
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.setRepeatMode(ValueAnimator.RESTART);
         objectAnimator.setInterpolator(new LinearInterpolator());
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(objectAnimator);
+        set.start();
         return view;
     }
 
