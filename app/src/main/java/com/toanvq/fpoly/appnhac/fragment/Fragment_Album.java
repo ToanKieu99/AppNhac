@@ -1,5 +1,6 @@
 package com.toanvq.fpoly.appnhac.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.toanvq.fpoly.appnhac.R;
+import com.toanvq.fpoly.appnhac.activity.DanhSachAlbumActivity;
 import com.toanvq.fpoly.appnhac.adapter.AlbumAdapter;
 import com.toanvq.fpoly.appnhac.model.Album;
 import com.toanvq.fpoly.appnhac.service.APIservice;
@@ -39,6 +41,13 @@ public class Fragment_Album extends Fragment {
         view = inflater.inflate(R.layout.fragment_album,container,false);
         recyclerViewAlbum = view.findViewById(R.id.recyclerViewAlbum);
         txtxemthemAlbum = view.findViewById(R.id.txtxemthem);
+        txtxemthemAlbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),DanhSachAlbumActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData();
         return view;
     }

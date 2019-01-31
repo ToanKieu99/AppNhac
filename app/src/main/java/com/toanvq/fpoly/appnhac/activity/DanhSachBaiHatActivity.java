@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
 import com.toanvq.fpoly.appnhac.adapter.DanhsachbaihatAdapter;
+import com.toanvq.fpoly.appnhac.model.Album;
 import com.toanvq.fpoly.appnhac.model.BaiHat;
 import com.toanvq.fpoly.appnhac.model.PlayList;
 import com.toanvq.fpoly.appnhac.model.Quangcao;
@@ -52,6 +53,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     DanhsachbaihatAdapter danhsachbaihatAdapter;
     PlayList playList;
     TheLoai theLoai;
+    Album album;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +73,35 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         if (theLoai != null && !theLoai.getTenTheLoai().equals("")){
             setValueInView(theLoai.getTenTheLoai(),theLoai.getHinhTheLoai());
             GetDataTheLoai(theLoai.getIdTheLoai());
-
+        }
+        if (album != null && !album.getTenAlbum().equals("")){
+            setValueInView(album.getTenAlbum(),album.getHinhanhAlbum());
+            GetDataAlbum(album.getIdAlbum());
         }
     }
+
+    private void GetDataAlbum(String idAlbum) {
+        Dataservice dataservice = APIservice.getService();
+        Call<List<BaiHat>> callback = dataservice.GetDanhSachBaiHatTheoAlbum(idAlbum);
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                mangbaihat = (ArrayList<BaiHat>) response.body();
+                danhsachbaihatAdapter = new DanhsachbaihatAdapter(DanhSachBaiHatActivity.this,mangbaihat);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
+                recyclerViewDanhSach.setLayoutManager(linearLayoutManager);
+                recyclerViewDanhSach.setAdapter(danhsachbaihatAdapter);
+                evenClick();
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 
     private void GetDataTheLoai(String idtheloai){
         Dataservice dataservice = APIservice.getService();
@@ -86,6 +114,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
                 recyclerViewDanhSach.setLayoutManager(linearLayoutManager);
                 recyclerViewDanhSach.setAdapter(danhsachbaihatAdapter);
+                evenClick();
             }
 
             @Override
@@ -107,6 +136,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
                 recyclerViewDanhSach.setLayoutManager(linearLayoutManager);
                 recyclerViewDanhSach.setAdapter(danhsachbaihatAdapter);
+                evenClick();
             }
 
             @Override
@@ -149,6 +179,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
                 recyclerViewDanhSach.setLayoutManager(linearLayoutManager);
                 recyclerViewDanhSach.setAdapter(danhsachbaihatAdapter);
+                evenClick();
             }
 
             @Override
@@ -170,6 +201,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        fab.setExpanded(false);
 
     }
 
@@ -196,6 +228,20 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             if (intent.hasExtra("IDTHELOAI")){
                 theLoai = (TheLoai) intent.getSerializableExtra("IDTHELOAI");
             }
+            if (intent.hasExtra("ALBUM")){
+                album = (Album) intent.getSerializableExtra("ALBUM");
+            }
         }
+    }
+    private void evenClick(){
+        fab.setExpanded(true);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DanhSachBaiHatActivity.this,PlayNhacActivity.class);
+                intent.putExtra("ALLBAIHAT",mangbaihat);
+                startActivity(intent);
+            }
+        });
     }
 }

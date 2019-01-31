@@ -20,7 +20,10 @@
         </activity>
         <activity android:name=".activity.DanhSachBaiHatActivity" />
         <activity android:name=".activity.DanhsachPlaylistActivity" />
-        <activity android:name=".activity.DanhSachTatcachudeActivity"></activity>
+        <activity android:name=".activity.DanhSachTatcachudeActivity" />
+        <activity android:name=".activity.DanhsachtheloaitheochudeActivity" />
+        <activity android:name=".activity.DanhSachAlbumActivity" />
+        <activity android:name=".activity.PlayNhacActivity"></activity>
     </application>
 
 </manifest>

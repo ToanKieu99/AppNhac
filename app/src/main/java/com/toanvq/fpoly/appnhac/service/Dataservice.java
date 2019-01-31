@@ -6,6 +6,7 @@ import com.toanvq.fpoly.appnhac.model.ChuDe;
 import com.toanvq.fpoly.appnhac.model.ChuDeTheLoaiTrongNgay;
 import com.toanvq.fpoly.appnhac.model.PlayList;
 import com.toanvq.fpoly.appnhac.model.Quangcao;
+import com.toanvq.fpoly.appnhac.model.TheLoai;
 
 import java.util.List;
 
@@ -59,6 +60,21 @@ public interface Dataservice {
 
     @GET("tatcachude.php")
     Call<List<ChuDe>> GetAllChuDe();
+
+    @FormUrlEncoded
+    @POST("theloaitheochude.php")
+    Call<List<TheLoai>> GetTheloaitheochude(@Field("idchude") String idchude);
+
+    @GET("tatcaalbum.php")
+    Call<List<Album>> GetAllAlbum();
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHat>> GetDanhSachBaiHatTheoAlbum(@Field("$idalbum") String idalbum);
+
+    @FormUrlEncoded
+    @POST("updateluotthich.php")
+    Call<String> UpdateLuotThich(@Field("luotthich") String luotthich, @Field("idbaihat") String idbaihat);
 
 
 

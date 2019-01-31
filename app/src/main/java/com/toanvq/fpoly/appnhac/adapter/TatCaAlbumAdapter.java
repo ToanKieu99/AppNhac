@@ -17,31 +17,33 @@ import com.toanvq.fpoly.appnhac.model.Album;
 
 import java.util.ArrayList;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+import retrofit2.http.PUT;
+
+public class TatCaAlbumAdapter extends RecyclerView.Adapter<TatCaAlbumAdapter.ViewHolder> {
 
     Context context;
     ArrayList<Album> albumArrayList;
 
-    public AlbumAdapter(Context context, ArrayList<Album> albumArrayList) {
+    public TatCaAlbumAdapter(Context context, ArrayList<Album> albumArrayList) {
         this.context = context;
         this.albumArrayList = albumArrayList;
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater inflater =  LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_album,viewGroup,false);
-
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.item_tat_ca_album,viewGroup,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Album album = albumArrayList.get(i);
-        viewHolder.txtcasialbum.setText(album.getTencasiAlbum());
-        viewHolder.txtTenAlbum.setText(album.getTenAlbum());
-        Picasso.with(context).load(album.getHinhanhAlbum()).into(viewHolder.imghinhAlbum);
+        Picasso.with(context).load(album.getHinhanhAlbum()).into(viewHolder.imgalbum);
+        viewHolder.txttenalbum.setText(album.getTenAlbum());
+        viewHolder.tencassiAlbum.setText(album.getTencasiAlbum());
 
     }
 
@@ -50,18 +52,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         return albumArrayList.size();
     }
 
-
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imghinhAlbum;
-        TextView txtTenAlbum,txtcasialbum;
-
-
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        ImageView imgalbum;
+        TextView txttenalbum,tencassiAlbum;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imghinhAlbum = itemView.findViewById(R.id.imageviewAlbum);
-            txtTenAlbum = itemView.findViewById(R.id.textviewtenalbum);
-            txtcasialbum = itemView.findViewById(R.id.textviewtencasialbum);
+
+            imgalbum = itemView.findViewById(R.id.imageviewallalbum);
+            txttenalbum = itemView.findViewById(R.id.txttenALLAlbum);
+            tencassiAlbum = itemView.findViewById(R.id.tencassiAlbum);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

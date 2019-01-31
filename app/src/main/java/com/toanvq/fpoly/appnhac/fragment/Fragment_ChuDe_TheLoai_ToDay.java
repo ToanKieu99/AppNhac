@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
 import com.toanvq.fpoly.appnhac.activity.DanhSachBaiHatActivity;
 import com.toanvq.fpoly.appnhac.activity.DanhSachTatcachudeActivity;
+import com.toanvq.fpoly.appnhac.activity.DanhsachtheloaitheochudeActivity;
 import com.toanvq.fpoly.appnhac.model.ChuDe;
 import com.toanvq.fpoly.appnhac.model.ChuDeTheLoaiTrongNgay;
 import com.toanvq.fpoly.appnhac.model.TheLoai;
@@ -65,7 +66,7 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                ChuDeTheLoaiTrongNgay chuDeTheLoaiTrongNgay = response.body();
 
                // mảng chủ đề
-               ArrayList<ChuDe> chuDeArrayList = new ArrayList<>();
+               final ArrayList<ChuDe> chuDeArrayList = new ArrayList<>();
                chuDeArrayList.addAll(chuDeTheLoaiTrongNgay.getChuDe());
                // mảng thể loại
                final ArrayList<TheLoai> theLoaiArrayList = new ArrayList<>();
@@ -89,6 +90,16 @@ public class Fragment_ChuDe_TheLoai_ToDay extends Fragment {
                    cardView.setLayoutParams(layout);
                    cardView.addView(imageView);
                    linearLayout.addView(cardView);
+
+                   final int finalI = i;
+                   imageView.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           Intent intent = new Intent(getActivity(),DanhsachtheloaitheochudeActivity.class);
+                           intent.putExtra("CHUDE",chuDeArrayList.get(finalI));
+                           startActivity(intent);
+                       }
+                   });
                }
 
                // lấy ra các item thể loại rồi đổ ra View vừa tạo

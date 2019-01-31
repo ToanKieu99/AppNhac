@@ -1,6 +1,7 @@
 package com.toanvq.fpoly.appnhac.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.toanvq.fpoly.appnhac.R;
+import com.toanvq.fpoly.appnhac.activity.DanhsachtheloaitheochudeActivity;
 import com.toanvq.fpoly.appnhac.model.ChuDe;
 
 import java.util.ArrayList;
@@ -52,6 +54,14 @@ public class DanhsachTatcachudeAdapter extends RecyclerView.Adapter<DanhsachTatc
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgchude = itemView.findViewById(R.id.imageviewtatcachude);
+            imgchude.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,DanhsachtheloaitheochudeActivity.class);
+                    intent.putExtra("CHUDE",arraychude.get(getPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
