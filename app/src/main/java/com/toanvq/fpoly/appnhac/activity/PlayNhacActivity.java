@@ -23,6 +23,7 @@ import com.toanvq.fpoly.appnhac.adapter.PlayBaiHatAdapter;
 import com.toanvq.fpoly.appnhac.adapter.ViewPagerPlaynhacAdapter;
 import com.toanvq.fpoly.appnhac.fragment.Fragment_Danh_Sach_Play_BaiHat;
 import com.toanvq.fpoly.appnhac.fragment.Fragment_dia_nhac;
+import com.toanvq.fpoly.appnhac.intenservice.Notification;
 import com.toanvq.fpoly.appnhac.model.BaiHat;
 
 import java.io.IOException;
@@ -281,8 +282,9 @@ public class PlayNhacActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                mediaPlayer.stop();
-                mangbaihat.clear();
+//                mediaPlayer.stop();
+//                mangbaihat.clear();
+                Notification.customBigNotification(getApplicationContext());
             }
         });
         toolbar.setTitleTextColor(Color.WHITE);

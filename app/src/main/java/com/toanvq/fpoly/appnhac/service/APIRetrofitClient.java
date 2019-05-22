@@ -12,7 +12,7 @@ import okhttp3.Protocol;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class APIRetrofitClient {
+    public class APIRetrofitClient {
 
     // tạo ra 1 biến Retrofit
     private static Retrofit retrofit = null;
